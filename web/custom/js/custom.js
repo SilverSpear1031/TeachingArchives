@@ -1,7 +1,7 @@
 angular.module('FileManagerApp').config(['fileManagerConfigProvider', function (config) {
     var defaults = config.$get();
     config.set({
-        appName: '文件管理',
+        appName: '教学档案管理系统',
         listUrl: 'listFile',
         renameUrl: "renameFile",
         removeUrl: 'removeFile',
@@ -22,7 +22,7 @@ angular.module('FileManagerApp').config(['fileManagerConfigProvider', function (
 
 angular.module('FileManagerApp').config(['$translateProvider', function($translateProvider) {
     $translateProvider.translations('cn', {
-        filemanager: '文件管理',
+        filemanager: '教学档案管理',
         language: '语言',
         chinese : '中文',
         english: '英语',
