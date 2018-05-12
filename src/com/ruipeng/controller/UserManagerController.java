@@ -2,6 +2,7 @@ package com.ruipeng.controller;
 
 import com.ruipeng.pojo.UserTa;
 import com.ruipeng.service.UserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,9 @@ import java.io.IOException;
  */
 @RestController
 public class UserManagerController {
+    private String homepage_Path="/index.html";
+    private String userLogin_Path="/custom/jsp/userLogin.jsp";
+
     @Resource
     private UserService userService;
 
@@ -51,10 +55,22 @@ public class UserManagerController {
                 response.addCookie(cookie3);
             }
 
-                response.sendRedirect("/index.html");
+                response.sendRedirect(homepage_Path);
         } else {
             request.getSession().setAttribute("info", "帐号或密码错误");
-            response.sendRedirect("/custom/jsp/userLogin.jsp");
+            request.getSession().removeAttribute("userName");
+            request.getSession().removeAttribute("userAccount");
+            request.getSession().removeAttribute("userAuthority");
+            Cookie cookie1 = new Cookie("userName", null);
+            Cookie cookie2 = new Cookie("userAccount", null);
+            Cookie cookie3= new Cookie("userAuthority", null);
+            cookie1.setMaxAge(0);
+            cookie2.setMaxAge(0);
+            cookie3.setMaxAge(0);
+            response.addCookie(cookie1);
+            response.addCookie(cookie2);
+            response.addCookie(cookie3);
+            response.sendRedirect(userLogin_Path);
         }
     }
 }
