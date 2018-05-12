@@ -9,8 +9,22 @@
       </button>
       <a class="navbar-brand hidden-xs" href="" ng-click="fileNavigator.goTo(-1)">{{config.appName}}</a>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <div class="navbar-form navbar-right">
+
+        <a class="Aclass" href="custom/jsp/userLogin.jsp" data-toggle="modal" data-target="#register">
+          <button class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-registration-mark "></i>{{"register" | translate}}
+          </button>
+        </a>
+
+        <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#authority">
+          <i class="glyphicon glyphicon-eye-open "></i>{{"authority" | translate}}
+        </button>
+
+        <i class="glyphicon glyphicon-option-vertical"></i>
+
         <input type="text" class="form-control input-sm " placeholder="{{'search' | translate}}..." ng-model="$parent.query">
 
         <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#newfolder" ng-click="touch()">
@@ -43,6 +57,9 @@
             <i class="glyphicon glyphicon-th-list"></i>
         </button>
 
+        <button class="btn btn-default btn-sm" onclick="location='/userLogout'" data-toggle="modal" data-target="#userLogout">
+          <i class="glyphicon glyphicon-off "></i>{{"logout" | translate}}
+        </button>
       </div>
     </div>
   </div>

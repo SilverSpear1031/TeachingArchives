@@ -27,32 +27,21 @@ public class UserManagerController {
     @RequestMapping(value = "/userLogin", produces = "application/json;charset=utf8")
     public void userLogin(HttpServletRequest request, HttpServletResponse response, UserTa userTa, Model model) throws IOException {
         UserTa userTa1 = userService.queryUserTa(userTa);
+        response.setContentType("text/html;charset=utf-8");
         if (userTa1 != null) {
             request.getSession().setAttribute("userName", userTa1.getUsername());
             request.getSession().setAttribute("userAccount", userTa1.getUseraccount());
             request.getSession().setAttribute("userAuthority", userTa1.getUserauthority());
 
             if (request.getParameter("autoLogin") != null) {      //自动登录
-                Cookie cookie1 = new Cookie("userName", userTa1.getUsername());
-                Cookie cookie2 = new Cookie("userAccount", userTa1.getUseraccount());
-                Cookie cookie3 = new Cookie("userAuthority", userTa1.getUserauthority());
+                Cookie cookie1 = new Cookie("userAccount", userTa1.getUseraccount());
                 cookie1.setMaxAge(30 * 24 * 60 * 60);
-                cookie2.setMaxAge(30 * 24 * 60 * 60);
-                cookie3.setMaxAge(30 * 24 * 60 * 60);
                 response.addCookie(cookie1);
-                response.addCookie(cookie2);
-                response.addCookie(cookie3);
 
             } else {    //如果没选择自动登录，需要清除自动登录的cookie
-                Cookie cookie1 = new Cookie("userName", null);
-                Cookie cookie2 = new Cookie("userAccount", null);
-                Cookie cookie3= new Cookie("userAuthority", null);
+                Cookie cookie1 = new Cookie("userAccount", null);
                 cookie1.setMaxAge(0);
-                cookie2.setMaxAge(0);
-                cookie3.setMaxAge(0);
                 response.addCookie(cookie1);
-                response.addCookie(cookie2);
-                response.addCookie(cookie3);
             }
 
                 response.sendRedirect(homepage_Path);
@@ -61,16 +50,26 @@ public class UserManagerController {
             request.getSession().removeAttribute("userName");
             request.getSession().removeAttribute("userAccount");
             request.getSession().removeAttribute("userAuthority");
-            Cookie cookie1 = new Cookie("userName", null);
-            Cookie cookie2 = new Cookie("userAccount", null);
-            Cookie cookie3= new Cookie("userAuthority", null);
+            Cookie cookie1 = new Cookie("userAccount", null);
             cookie1.setMaxAge(0);
-            cookie2.setMaxAge(0);
-            cookie3.setMaxAge(0);
             response.addCookie(cookie1);
-            response.addCookie(cookie2);
-            response.addCookie(cookie3);
             response.sendRedirect(userLogin_Path);
         }
+    }
+
+    @RequestMapping(value = "/userLogout", produces = "application/json;charset=utf8")
+    public void userLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+
+        request.getSession().removeAttribute("userName");
+        request.getSession().removeAttribute("userAccount");
+        request.getSession().removeAttribute("userAuthority");
+
+        Cookie cookie1 = new Cookie("userAccount", null);
+        cookie1.setMaxAge(0);
+        response.addCookie(cookie1);
+
+        response.sendRedirect(userLogin_Path);
     }
 }
