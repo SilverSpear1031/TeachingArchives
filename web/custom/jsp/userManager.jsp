@@ -4,17 +4,17 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>数字框</title>
+    <title>教学档案管理用户</title>
     <!-- 引入Jquery -->
-    <script type="text/javascript" src="../../../easyui/jquery.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../easyui/jquery.min.js" charset="utf-8"></script>
     <!-- 引入Jquery_easyui -->
-    <script type="text/javascript" src="../../../easyui/jquery.easyui.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../easyui/jquery.easyui.min.js" charset="utf-8"></script>
     <!-- 引入easyUi国际化--中文 -->
-    <script type="text/javascript" src="../../../easyui/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../easyui/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
     <!-- 引入easyUi默认的CSS格式--蓝色 -->
-    <link rel="stylesheet" type="text/css" href="../../../easyui/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css"/>
     <!-- 引入easyUi小图标 -->
-    <link rel="stylesheet" type="text/css" href="../../../easyui/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css"/>
 
     <script type="text/javascript">
         $(function () {
@@ -255,13 +255,11 @@
 
 </head>
 <body>
-<br/><br/><br/><br/><br/><br/>
-
 <div align="center">
     <table id="mydatagrid">
         <thead>
         <tr>
-            <th data-options="field:'useraccount',width:66,align:'center',editor:{type:'validatebox',options:{required:true,validType:['length[6,30]'],},}">
+            <th data-options="field:'useraccount',width:66,align:'center',editor:{type:'validatebox',options:{required:true,validType:['length[6,30]'],editable: false,},}">
                 &nbsp;帐号
             </th>
             <th data-options="field:'userpassword',width:66,align:'center',editor:{type:'validatebox',options:{required:true,validType:['length[6,30]'],},}">
@@ -273,12 +271,15 @@
             <th data-options="field:'userphonenumber',width:66,align:'center',editor:{type:'validatebox',options:{required:false,validType:['mobile','length[1,20]'],},}">
                 联系电话
             </th>
-            <th data-options="field:'useremail',width:144,align:'center',editor:{type:'validatebox',options:{required:false,validType:['email','length[1,30]'],},}">
+            <th data-options="field:'useremail',width:122,align:'center',editor:{type:'validatebox',options:{required:false,validType:['email','length[1,30]'],},}">
                 邮箱
             </th>
-            <th data-options="field:'userauthority',width:66,align:'center',editor:{type:'combobox',options:{data:userauthority,required:true,editable: false,},}">
-                &nbsp;权限类别
+            <th data-options="field:'userauthority',width:166,align:'center',editor:{type:'validatebox',options:{required:true,validType:['length[1,35]'],},}">
+                权限类别
             </th>
+            <%--<th data-options="field:'userauthority',width:66,align:'center',editor:{type:'combobox',options:{data:userauthority,required:true,},}">--%>
+                <%--&nbsp;权限类别--%>
+            <%--</th>--%>
         </tr>
         </thead>
     </table>
