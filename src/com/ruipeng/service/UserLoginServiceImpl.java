@@ -12,7 +12,7 @@ import java.util.List;
  * Created by ruipeng on 2018/5/11.
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserLoginServiceImpl implements UserLoginService {
     @Resource
     private UserTaMapper userTaMapper;
 
