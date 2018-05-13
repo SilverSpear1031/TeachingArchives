@@ -31,7 +31,20 @@ public class UserManagerController {
     }
 
     @RequestMapping(value = "/userDelete", produces = "application/json;charset=utf8")
-    public void userDelete(HttpServletRequest request, HttpServletResponse response, UserTa userTa, Model model){
+    @ResponseBody
+    public Integer userDelete(String ids){
+        return userManagerService.userDelete(ids);
+    }
 
+    @RequestMapping(value = "/userAdd", produces = "application/json;charset=utf8")
+    @ResponseBody
+    public Integer userAdd(UserTa userTa){
+        return userManagerService.userAdd(userTa);
+    }
+
+    @RequestMapping(value = "/userUpdate", produces = "application/json;charset=utf8")
+    @ResponseBody
+    public Integer userUpdate(UserTa userTa){
+        return userManagerService.userUpdate(userTa);
     }
 }

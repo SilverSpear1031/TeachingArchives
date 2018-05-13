@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>教学档案管理用户</title>
+    <title>管理用户</title>
     <!-- 引入Jquery -->
     <script type="text/javascript" src="../../easyui/jquery.min.js" charset="utf-8"></script>
     <!-- 引入Jquery_easyui -->
@@ -145,7 +145,7 @@
             };
 
             $('#mydatagrid').datagrid({
-                title: '教学档案管理系统',
+                title: '管理用户',
                 iconCls: 'icon-ok',
                 width: 1100,
                 pageSize: 15,//给后台传rows
@@ -297,7 +297,7 @@
     </div>
     <div>
         帐号<input type="text" name="useraccount"/>&nbsp;&nbsp;&nbsp;
-        姓名<input type="text" name="username"/>&nbsp;&nbsp;&nbsp;
+        用户<input type="text" name="username"/>&nbsp;&nbsp;&nbsp;
         <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="obj.search();">查询</a>
     </div>
 </div>

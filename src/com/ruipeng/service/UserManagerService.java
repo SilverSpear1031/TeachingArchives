@@ -8,5 +8,7 @@ import com.ruipeng.pojo.UserTa;
  */
 public interface UserManagerService {
     EasyuiPageParam userList(UserTa userTa,Integer page,Integer rows);
-    int userDelete(String ids);
+    Integer userDelete(String ids);
+    Integer userAdd(UserTa userTa);
+    Integer userUpdate(UserTa userTa);
 }

@@ -58,7 +58,7 @@ public class UserManagerServiceImpl implements UserManagerService {
     }
 
     @Override
-    public int userDelete(String ids) {
+    public Integer userDelete(String ids) {
         UserTaExample userTaExample = new UserTaExample();
         UserTaExample.Criteria criteria = userTaExample.createCriteria();
 
@@ -66,5 +66,19 @@ public class UserManagerServiceImpl implements UserManagerService {
         criteria.andUseraccountIn(idsList);
         int successNum = userTaMapper.deleteByExample(userTaExample);
         return successNum;
+    }
+
+    @Override
+    public Integer userAdd(UserTa userTa) {
+        return userTaMapper.insert(userTa);
+    }
+
+    @Override
+    public Integer userUpdate(UserTa userTa) {
+        UserTaExample userTaExample = new UserTaExample();
+        UserTaExample.Criteria criteria = userTaExample.createCriteria();
+
+        criteria.andUseraccountEqualTo(userTa.getUseraccount());
+        return userTaMapper.updateByExample(userTa,userTaExample);
     }
 }
