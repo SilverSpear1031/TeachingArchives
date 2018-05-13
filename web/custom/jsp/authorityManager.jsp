@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>管理用户</title>
+    <title>管理权限</title>
     <!-- 引入Jquery -->
     <script type="text/javascript" src="../../easyui/jquery.min.js" charset="utf-8"></script>
     <!-- 引入Jquery_easyui -->
@@ -31,6 +31,12 @@
                     },
                     message: '请输入数字，并确保格式正确'
                 },
+                pathLevel: {// 验证0-9的数字
+                    validator: function (value) {
+                        return /^(\d)$/i.test(value);
+                    },
+                    message: '请输入0-9的数字'
+                },
                 email: {// 验证邮箱
                     validator: function (value) {
                         return /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/i.test(value);
@@ -51,11 +57,11 @@
                     $('#save,#redo').show();    //显示保存和取消按钮
                     if (this.editrow == undefined) {
                         $('#mydatagrid').datagrid(  //在第一行进行添加
-                                'insertRow', {index: 0, row: {},}
+                            'insertRow', {index: 0, row: {},}
                         );
                     }
                     $('#mydatagrid').datagrid(  //将第一行设为可编辑状态
-                            'beginEdit', 0
+                        'beginEdit', 0
                     );
                     this.editrow = 0;
                 },
@@ -66,11 +72,11 @@
                             if (flag) {   //点击了确定
                                 var ids = [];
                                 for (var i = 0; i < rows.length; i++) {
-                                    ids.push(rows[i].useraccount);        //用ids.jpis(',')设置用逗号隔开
+                                    ids.push(rows[i].userauthority);        //用ids.jpis(',')设置用逗号隔开
                                 }
                                 $.ajax({
                                     type: 'POST',
-                                    url: '/userDelete',    //  访问handle
+                                    url: '/authorityDelete',    //  访问handle
                                     data: {
                                         ids: ids.join(','),        //用ids.jpis(',')设置用逗号隔开,可直接用In查询
 //                                        ids:ids,
@@ -98,10 +104,10 @@
                 },
                 search: function () {
                     $('#mydatagrid').datagrid(
-                            'load', {
-                            username: $('input[name="username"]').val(),
-                            useraccount: $('input[name="useraccount"]').val(),
-                            }
+                        'load', {
+                            userauthority: $('input[name="userauthority"]').val(),
+                            academy: $('input[name="academy"]').val(),
+                        }
                     );
                 },
                 edit: function () {
@@ -116,7 +122,7 @@
                             $('#mydatagrid').datagrid('beginEdit', index);
 
                             // 得到单元格对象,index指哪一行,field跟定义列的那个一样
-                            var cellEdit = $('#mydatagrid').datagrid('getEditor', {index: index, field: 'useraccount'});
+                            var cellEdit = $('#mydatagrid').datagrid('getEditor', {index: index, field: 'userauthority'});
                             var $input = cellEdit.target; // 得到文本框对象
                             //$input.val('aaa'); // 设值
                             $input.prop('readonly', true); // 设值只读
@@ -132,20 +138,20 @@
 //                    $('#save,#redo').hide();
 //                    this.editrow = false;
                     $('#mydatagrid').datagrid(  //将当前行设为结束编辑状态
-                            'endEdit', this.editrow
+                        'endEdit', this.editrow
                     );
                 },
                 redo: function () {
                     $('#save,#redo').hide();
                     this.editrow = undefined;
                     $('#mydatagrid').datagrid(  //调用回滚方法
-                            'rejectChanges'
+                        'rejectChanges'
                     );
                 },
             };
 
             $('#mydatagrid').datagrid({
-                title: '管理用户',
+                title: '管理权限',
                 iconCls: 'icon-ok',
                 width: 1100,
                 pageSize: 15,//给后台传rows
@@ -154,7 +160,7 @@
                 striped: true,//设置为true将交替显示行背景。
                 collapsible: false,//显示可折叠按钮
                 toolbar: "#tb",//在添加 增添、删除、修改操作的按钮要用到这个
-                url: '/userList',//url调用Action方法
+                url: '/authorityList',//url调用Action方法
                 loadMsg: '数据装载中......',
                 singleSelect: false,//为true时只能选择单行
                 fitColumns: true,//允许表格自动缩放，与列宽相对应
@@ -177,7 +183,7 @@
                         obj.editrow = rowIndex;
 
                         // 得到单元格对象,index指哪一行,field跟定义列的那个一样
-                        var cellEdit = $('#mydatagrid').datagrid('getEditor', {index: rowIndex, field: 'useraccount'});
+                        var cellEdit = $('#mydatagrid').datagrid('getEditor', {index: rowIndex, field: 'userauthority'});
                         var $input = cellEdit.target; // 得到文本框对象
                         //$input.val('aaa'); // 设值
                         $input.prop('readonly', true); // 设值只读
@@ -192,14 +198,12 @@
                     if (inserted.length > 0) {      //新增
                         $.ajax({
                             type: 'POST',
-                            url: '/userAdd',    //  访问handle
+                            url: '/authorityAdd',    //  访问handle
                             data: {
-                                useraccount: inserted[0].useraccount,
-                                userpassword: inserted[0].userpassword,
-                                username: inserted[0].username,
-                                userphonenumber: inserted[0].userphonenumber,
-                                useremail: inserted[0].useremail,
                                 userauthority: inserted[0].userauthority,
+                                listlevel: inserted[0].listlevel,
+                                listpostfix: inserted[0].listpostfix,
+                                academy: inserted[0].academy,
                             },
                             beforeSend: function () {
                                 $('#mydatagrid').datagrid('loading');
@@ -220,14 +224,12 @@
                     if (updated.length > 0) {
                         $.ajax({
                             type: 'POST',
-                            url: '/userUpdate',    //  访问handle
+                            url: '/authorityUpdate',    //  访问handle
                             data: {
-                                useraccount: updated[0].useraccount,
-                                userpassword: updated[0].userpassword,
-                                username: updated[0].username,
-                                userphonenumber: updated[0].userphonenumber,
-                                useremail: updated[0].useremail,
                                 userauthority: updated[0].userauthority,
+                                listlevel: updated[0].listlevel,
+                                listpostfix: updated[0].listpostfix,
+                                academy: updated[0].academy,
                             },
                             beforeSend: function () {
                                 $('#mydatagrid').datagrid('loading');
@@ -262,26 +264,26 @@
     <table id="mydatagrid">
         <thead>
         <tr>
-            <th data-options="field:'useraccount',width:66,align:'center',editor:{type:'validatebox',options:{required:true,validType:['length[6,30]'],editable: false,},}">
-                &nbsp;帐号
+            <th data-options="field:'userauthority',width:66,align:'center',editor:{type:'validatebox',options:{required:true,validType:['length[1,35]'],editable: false,},}">
+                &nbsp;权限类别
             </th>
-            <th data-options="field:'userpassword',width:66,align:'center',editor:{type:'validatebox',options:{required:true,validType:['length[6,30]'],},}">
-                密码
+            <th data-options="field:'academy',width:188,align:'center',editor:{type:'validatebox',options:{required:false,validType:['length[1,20]'],},}">
+                学院
+            <th data-options="field:'listlevel',width:66,align:'center',editor:{type:'validatebox',options:{required:true,validType:['pathLevel','length[1,2]'],},}">
+                权限等级
             </th>
-            <th data-options="field:'username',width:66,align:'center',editor:{type:'validatebox',options:{required:true,validType:['length[1,8]'],},}">
-                用户
+            <th data-options="field:'listpostfix',width:232,align:'center',editor:{type:'validatebox',options:{required:true,validType:['length[1,60]'],},}">
+                目录后缀
             </th>
-            <th data-options="field:'userphonenumber',width:66,align:'center',editor:{type:'validatebox',options:{required:false,validType:['mobile','length[1,20]'],},}">
-                联系电话
-            </th>
-            <th data-options="field:'useremail',width:122,align:'center',editor:{type:'validatebox',options:{required:false,validType:['email','length[1,30]'],},}">
-                邮箱
-            </th>
-            <th data-options="field:'userauthority',width:166,align:'center',editor:{type:'validatebox',options:{required:true,validType:['length[1,35]'],},}">
-                权限类别
-            </th>
+
+            <%--<th data-options="field:'useremail',width:122,align:'center',editor:{type:'validatebox',options:{required:false,validType:['email','length[1,30]'],},}">--%>
+                <%--邮箱--%>
+            <%--</th>--%>
+            <%--<th data-options="field:'userauthority',width:166,align:'center',editor:{type:'validatebox',options:{required:true,validType:['length[1,35]'],},}">--%>
+                <%--权限类别--%>
+            <%--</th>--%>
             <%--<th data-options="field:'userauthority',width:66,align:'center',editor:{type:'combobox',options:{data:userauthority,required:true,},}">--%>
-                <%--&nbsp;权限类别--%>
+            <%--&nbsp;权限类别--%>
             <%--</th>--%>
         </tr>
         </thead>
@@ -297,10 +299,11 @@
         <a href="#" class="easyui-linkbutton" iconCls="icon-redo" plain="true" style="display: none" id="redo"
            onclick="obj.redo();">取消</a>
         <a href="#" onclick="location.reload();" class="easyui-linkbutton" iconCls="icon-cancel" plain="true" >退出</a>
+    <%--<a href="<c:url value='/Logout'/>" class="easyui-linkbutton" iconCls="icon-cancel" plain="true" >退出</a>--%>
     </div>
     <div>
-        帐号<input type="text" name="useraccount"/>&nbsp;&nbsp;&nbsp;
-        用户<input type="text" name="username"/>&nbsp;&nbsp;&nbsp;
+        权限类别<input type="text" name="userauthority"/>&nbsp;&nbsp;&nbsp;
+        学院<input type="text" name="academy"/>&nbsp;&nbsp;&nbsp;
         <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="obj.search();">查询</a>
     </div>
 </div>

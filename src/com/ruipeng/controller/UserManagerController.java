@@ -18,9 +18,6 @@ import java.io.IOException;
  */
 @RestController
 public class UserManagerController {
-    private String homepage_Path="/index.html";
-    private String userLogin_Path="/custom/jsp/userLogin.jsp";
-
     @Resource
     private UserManagerService userManagerService;
 

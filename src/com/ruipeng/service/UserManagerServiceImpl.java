@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by ruipeng on 2018/5/12.
+ * 用户管理
  */
 @Service
 public class UserManagerServiceImpl implements UserManagerService {
