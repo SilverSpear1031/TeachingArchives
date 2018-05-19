@@ -363,65 +363,65 @@ public class AuthorityTaExample {
             return (Criteria) this;
         }
 
-        public Criteria andListpostfixEqualTo(String value) {
-            addCriterion("listPostfix =", value, "listpostfix");
-            return (Criteria) this;
-        }
-
-        public Criteria andListpostfixNotEqualTo(String value) {
-            addCriterion("listPostfix <>", value, "listpostfix");
-            return (Criteria) this;
-        }
-
-        public Criteria andListpostfixGreaterThan(String value) {
-            addCriterion("listPostfix >", value, "listpostfix");
-            return (Criteria) this;
-        }
-
-        public Criteria andListpostfixGreaterThanOrEqualTo(String value) {
-            addCriterion("listPostfix >=", value, "listpostfix");
-            return (Criteria) this;
-        }
-
-        public Criteria andListpostfixLessThan(String value) {
-            addCriterion("listPostfix <", value, "listpostfix");
-            return (Criteria) this;
-        }
-
-        public Criteria andListpostfixLessThanOrEqualTo(String value) {
-            addCriterion("listPostfix <=", value, "listpostfix");
-            return (Criteria) this;
-        }
-
-        public Criteria andListpostfixLike(String value) {
-            addCriterion("listPostfix like", value, "listpostfix");
-            return (Criteria) this;
-        }
-
-        public Criteria andListpostfixNotLike(String value) {
-            addCriterion("listPostfix not like", value, "listpostfix");
-            return (Criteria) this;
-        }
-
-        public Criteria andListpostfixIn(List<String> values) {
-            addCriterion("listPostfix in", values, "listpostfix");
-            return (Criteria) this;
-        }
-
-        public Criteria andListpostfixNotIn(List<String> values) {
-            addCriterion("listPostfix not in", values, "listpostfix");
-            return (Criteria) this;
-        }
-
-        public Criteria andListpostfixBetween(String value1, String value2) {
-            addCriterion("listPostfix between", value1, value2, "listpostfix");
-            return (Criteria) this;
-        }
-
-        public Criteria andListpostfixNotBetween(String value1, String value2) {
-            addCriterion("listPostfix not between", value1, value2, "listpostfix");
-            return (Criteria) this;
-        }
+//        public Criteria andListpostfixEqualTo(String value) {
+//            addCriterion("listPostfix =", value, "listpostfix");
+//            return (Criteria) this;
+//        }
+//
+//        public Criteria andListpostfixNotEqualTo(String value) {
+//            addCriterion("listPostfix <>", value, "listpostfix");
+//            return (Criteria) this;
+//        }
+//
+//        public Criteria andListpostfixGreaterThan(String value) {
+//            addCriterion("listPostfix >", value, "listpostfix");
+//            return (Criteria) this;
+//        }
+//
+//        public Criteria andListpostfixGreaterThanOrEqualTo(String value) {
+//            addCriterion("listPostfix >=", value, "listpostfix");
+//            return (Criteria) this;
+//        }
+//
+//        public Criteria andListpostfixLessThan(String value) {
+//            addCriterion("listPostfix <", value, "listpostfix");
+//            return (Criteria) this;
+//        }
+//
+//        public Criteria andListpostfixLessThanOrEqualTo(String value) {
+//            addCriterion("listPostfix <=", value, "listpostfix");
+//            return (Criteria) this;
+//        }
+//
+//        public Criteria andListpostfixLike(String value) {
+//            addCriterion("listPostfix like", value, "listpostfix");
+//            return (Criteria) this;
+//        }
+//
+//        public Criteria andListpostfixNotLike(String value) {
+//            addCriterion("listPostfix not like", value, "listpostfix");
+//            return (Criteria) this;
+//        }
+//
+//        public Criteria andListpostfixIn(List<String> values) {
+//            addCriterion("listPostfix in", values, "listpostfix");
+//            return (Criteria) this;
+//        }
+//
+//        public Criteria andListpostfixNotIn(List<String> values) {
+//            addCriterion("listPostfix not in", values, "listpostfix");
+//            return (Criteria) this;
+//        }
+//
+//        public Criteria andListpostfixBetween(String value1, String value2) {
+//            addCriterion("listPostfix between", value1, value2, "listpostfix");
+//            return (Criteria) this;
+//        }
+//
+//        public Criteria andListpostfixNotBetween(String value1, String value2) {
+//            addCriterion("listPostfix not between", value1, value2, "listpostfix");
+//            return (Criteria) this;
+//        }
 
         public Criteria andAcademyIsNull() {
             addCriterion("academy is null");
